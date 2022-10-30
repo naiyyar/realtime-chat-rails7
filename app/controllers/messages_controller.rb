@@ -3,7 +3,8 @@ class MessagesController < ApplicationController
 
   # GET /messages or /messages.json
   def index
-    @messages = Message.all
+    @room = Room.find(params[:id])
+    @messages = @rooms.messages
   end
 
   # GET /messages/1 or /messages/1.json

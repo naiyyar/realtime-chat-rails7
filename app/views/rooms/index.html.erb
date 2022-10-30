@@ -1,14 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Rooms</h1>
-
-<div id="rooms">
+<article class="leaderboard">
+  <h1 class="leaderboard__title">
+    <span class="leaderboard__title--bottom">Your Rooms(<%=@rooms.count%>)</span>
+  </h1>
+  
   <% @rooms.each do |room| %>
-    <%= render room %>
-    <p>
-      <%= link_to "Show this room", room %>
-    </p>
-  <% end %>
-</div>
+    <main class="leaderboard__profiles">
+      <span class="leaderboard__name"><%=room.name%></span>
+      <span class="leaderboard__value"><%= room.unread_messages_count %></span>
+    </main>
+  <%end%>
 
-<%= link_to "New room", new_room_path %>
+</div>
