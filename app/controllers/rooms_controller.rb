@@ -3,7 +3,9 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = current_user.rooms
+    @rooms = current_user.rooms.order(created_at: :desc)
+    @single_room = @rooms.first
+    @room = Room.new
   end
 
   # GET /rooms/1 or /rooms/1.json
@@ -12,6 +14,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/new
   def new
+    @users = User.where.not(id: current_user.id)
     @room = Room.new
   end
 
@@ -21,17 +24,7 @@ class RoomsController < ApplicationController
 
   # POST /rooms or /rooms.json
   def create
-    @room = Room.new(room_params)
-    @room.user = current_user
-    respond_to do |format|
-      if @room.save
-        format.html { redirect_to room_url(@room), notice: "Room was successfully created." }
-        format.json { render :show, status: :created, location: @room }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
-    end
+    @room = Room.create!(room_params.merge(user_id: current_user.id))    
   end
 
   # PATCH/PUT /rooms/1 or /rooms/1.json
@@ -52,8 +45,10 @@ class RoomsController < ApplicationController
     @room.destroy
 
     respond_to do |format|
-      format.html { redirect_to rooms_url, notice: "Room was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { 
+        render turbo_stream: turbo_stream.remove(@room)
+      }
+      
     end
   end
 

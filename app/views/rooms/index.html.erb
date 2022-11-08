@@ -1,13 +1,50 @@
-<article class="leaderboard">
-  <h1 class="leaderboard__title">
-    <span class="leaderboard__title--bottom">Your Rooms(<%=@rooms.count%>)</span>
-  </h1>
-  
-  <% @rooms.each do |room| %>
-    <main class="leaderboard__profiles">
-      <span class="leaderboard__name"><%=room.name%></span>
-      <span class="leaderboard__value"><%= room.unread_messages_count %></span>
-    </main>
-  <%end%>
+<div class="row mt-4">
+  <div class="col-lg-4">
+    <article class="leaderboard">
+      <h4>New Room</h4>
+      <%=render 'rooms/form', room: @room %>
 
+      <h3 class="leaderboard__title mt-3">
+        <p class="leaderboard__title--bottom">Your Rooms(<%=@rooms.count%>)</p>
+      </h3>
+      
+      <%= turbo_stream_from 'rooms' %>
+      
+      <div id="rooms">
+        <%= render @rooms %>
+      </div>
+    </article>
+  </div>
+
+  <div class="col-lg-8">
+    <% if @single_room.present? %>
+      <div class="message-box position-relative">
+        <div class="card">
+          <div class="card-header"><%= @single_room.name %></div>
+          
+          <div id="message-box">
+            <%= render partial: 'messages/message', collection: @messages %>
+          </div>
+        </div>
+
+        <div id="messages-form" class="position-absolute">
+          <%= render 'messages/form', room: @single_room %>
+        </div>
+      </div>
+    <%end%>
+  </div>
 </div>
+
+<style type="text/css">
+  .message-box{
+    background: #fff;
+    height: calc(100vh - 100px);
+    width: 100%;
+  }
+  #messages-form{
+    bottom: 0px;
+    background: #ddd;
+    padding:  10px;
+    width: 100%;
+  }
+</style>

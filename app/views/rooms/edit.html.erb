@@ -1,10 +1,14 @@
-<h1>Editing room</h1>
+<div class="form-container">
+  <h1>Editing room</h1>
+  
+  <br>
 
-<%= render "form", room: @room %>
+  <%= render "form", room: @room %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this room", @room %> |
-  <%= link_to "Back to rooms", rooms_path %>
+  <div>
+    <%= link_to "Show this room", @room %> |
+    <%= link_to "Back to rooms", rooms_path %>
+  </div>
 </div>

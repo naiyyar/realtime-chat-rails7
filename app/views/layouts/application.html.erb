@@ -8,13 +8,32 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
   </head>
 
   <body>
-    <div>
+    <div class="container">
+      <nav class="navbar-expand-lg navbar-light bg-light position-relative">
+        <!-- Links -->
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <% if current_user %>
+              <%= link_to current_user.email, '#', class: "nav-link"%>
+            <%end%>    
+          </li>
+        </ul>
+
+        <div class="actions position-absolute" style="right: 10px; top: 5px;">
+          <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: 'sign-out' if current_user %>
+          <%= link_to 'Sign up', new_user_registration_path unless current_user %>
+        </div>
+      </nav>
+
       <% if notice %>
         <p class="alert alert-success"><%= notice %></p>
       <% end %>
+      
       <% if alert %>
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>

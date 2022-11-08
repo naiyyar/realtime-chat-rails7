@@ -1,22 +1,11 @@
-<%= form_with(model: room) do |form| %>
-  <% if room.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+<%= form_with(model: room, remote: true, class: 'form-inline') do |form| %>
 
-      <ul>
-        <% room.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form.text_field :name, class: 'form-control', placeholder: 'Name' %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <!-- <div class="form-group">
+    <%#= form.label :users, style: "display: block" %>
+    <%#= form.select 'user_ids[]', options_for_select(@users.pluck(:email, :id)),{}, {multiple: true, class: 'form-control', style: 'min-height: 150px;', required: true}%>
+  </div> -->
 
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Create', class: "btn btn-primary ml-3" %>
 <% end %>

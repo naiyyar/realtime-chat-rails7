@@ -1,27 +1,7 @@
-<%= form_with(model: message) do |form| %>
-  <% if message.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(message.errors.count, "error") %> prohibited this message from being saved:</h2>
+<%= form_with(model: [room, Message.new], remote: true, class: 'form-inline') do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
-      <ul>
-        <% message.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form.text_field :body, class: 'form-control', autocomplete: :off %>
 
-  <div>
-    <%= form.label :body, style: "display: block" %>
-    <%= form.text_field :body %>
-  </div>
-
-  <div>
-    <%= form.label :room_id, style: "display: block" %>
-    <%= form.text_field :room_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit 'Send', class: 'btn btn-primary btn-sm ml-2' %>
 <% end %>

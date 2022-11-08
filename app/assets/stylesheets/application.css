@@ -13,3 +13,57 @@
  *= require_tree .
  *= require_self
  */
+
+:root {
+  --color-darkblue: #1b1b32;
+  --color-darkblue-alpha: rgba(200, 200, 220, 0.6);
+}
+.float-right{
+  float: right;
+}
+.float-left{
+  float: left;
+}
+header{
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 20px 10px;
+}
+#content{
+  margin-top: 60px;
+  width: 100%;
+  padding: 0px 20px;
+}
+#content form.form-inline {
+  background: var(--color-darkblue-alpha);
+  padding: 2.5rem 0.625rem;
+  border-radius: 0.25rem;
+}
+
+.input-radio,
+.input-checkbox {
+  display: inline-block;
+  margin-right: 0.625rem;
+  min-height: 1.25rem;
+  min-width: 1.25rem;
+}
+
+.input-textarea {
+  min-height: 120px;
+  width: 100%;
+  padding: 0.625rem;
+  resize: vertical;
+  border: 1px solid rgba(255, 58, 158, 0.8);
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.sign-out{
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: blue;
+  font-size: 16px;
+}
+
