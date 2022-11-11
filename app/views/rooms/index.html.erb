@@ -1,5 +1,5 @@
 <div class="row mt-4">
-  <div class="col-lg-4">
+  <div class="col-lg-5">
     <article class="leaderboard">
       <h4>New Room</h4>
       <%=render 'rooms/form', room: @room %>
@@ -16,20 +16,12 @@
     </article>
   </div>
 
-  <div class="col-lg-8">
+  <div class="col-lg-7">
     <% if @single_room.present? %>
-      <div class="message-box position-relative">
-        <div class="card">
-          <div class="card-header"><%= @single_room.name %></div>
-          
-          <div id="message-box">
-            <%= render partial: 'messages/message', collection: @messages %>
-          </div>
-        </div>
+      <%= turbo_stream_from "messages" %>
 
-        <div id="messages-form" class="position-absolute">
-          <%= render 'messages/form', room: @single_room %>
-        </div>
+      <div class="message-box position-relative" id="messages">
+        <%= render 'messages/box', room: @single_room, messages: @messages %>
       </div>
     <%end%>
   </div>
@@ -38,7 +30,7 @@
 <style type="text/css">
   .message-box{
     background: #fff;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 65px);
     width: 100%;
   }
   #messages-form{
@@ -46,5 +38,32 @@
     background: #ddd;
     padding:  10px;
     width: 100%;
+  }
+  .card {
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0px solid rgba(0,0,0,.125);
+    border-radius: 0.25rem;
+    height: calc(100% - 65px);
+    overflow-y: scroll;
+  }
+  .single-message{
+    margin: 5px;
+  }
+  .single-message-box{
+    width: fit-content;
+    max-width: 40%;
+    border-radius: 10px;
+    margin-bottom: 0px;
+    background-color: #dadada;
+    padding: 5px 10px;
+  }
+  <%= ".msg-#{current_user&.id}" %> {
+    background-color: #007bff !important;
+    padding: 5px 10px;
+  }
+  <%= ".cont-#{current_user&.id}" %> {
+    display: flex;
+    justify-content: flex-end;
   }
 </style>

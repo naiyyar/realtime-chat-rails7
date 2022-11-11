@@ -1,9 +1,7 @@
-<%= turbo_frame_tag room do %>
-  <div class="row p-1 m-1 bg-light">
-    <div class="col-lg-6"><%=link_to room.name%></div>
-    <div class="col-lg-6 text-right">
-      <%=button_to 'Delete', room, method: :delete, class: 'btn btn-sm btn-danger', remote: true %>
-      <%=link_to 'Start Chat', room, method: :delete, class: 'btn btn-sm btn-danger', remote: true %>
-    </div>
+<div class="row p-1 m-1 bg-light">
+  <div class="col-lg-6"><%=link_to room.name, room_path(room) %></div>
+  <div class="col-lg-6 text-right d-flex">
+    <%#=button_to 'Delete', room, method: :delete, class: 'btn btn-sm btn-danger', remote: true %>
+    <%=link_to 'Start Chat', room, class: 'btn btn-sm btn-info' %>
   </div>
-<%end%>
+</div>

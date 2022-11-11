@@ -1,0 +1,8 @@
+<div class="card">
+  <div class="card-header"><%= room.name %></div>
+  <%= render partial: 'messages/message', collection: messages %>
+</div>
+
+<div id="messages-form" class="position-absolute">
+  <%= render 'messages/form', room: room %>
+</div>

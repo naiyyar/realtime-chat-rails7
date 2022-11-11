@@ -1,15 +1,24 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[ show edit update destroy ]
-
+  
   # GET /rooms or /rooms.json
   def index
-    @rooms = current_user.rooms.order(created_at: :desc)
+    @rooms = Room.order(created_at: :desc)
     @single_room = @rooms.first
+    @messages = @single_room.messages.order(created_at: :asc)
     @room = Room.new
+
+    render 'index'
   end
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    @rooms = current_user.rooms.order(created_at: :desc)
+    @single_room = @room
+    @messages = @single_room.messages.order(created_at: :asc)
+    @room = Room.new
+
+    render 'index'
   end
 
   # GET /rooms/new

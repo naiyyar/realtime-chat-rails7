@@ -1,12 +1,5 @@
-<div id="<%= dom_id message %>">
-  <p>
-    <strong>Body:</strong>
-    <%= message.body %>
-  </p>
-
-  <p>
-    <strong>Room:</strong>
-    <%= message.room_id %>
-  </p>
-
+<div id="<%= dom_id message %>" class="single-message cont-<%= message.user_id %>">
+  <div class="single-message-box msg-<%= message.user_id %>">
+    <p><%= message.body %></p>
+  </div>
 </div>

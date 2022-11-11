@@ -1,0 +1,3 @@
+<%= turbo_stream.replace('messages-box') do%>
+	<%= render 'messages/box', room: @single_room, messages: @messages %>
+<%end%>

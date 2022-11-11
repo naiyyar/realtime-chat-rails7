@@ -1,7 +1,7 @@
 <%= form_with(model: [room, Message.new], remote: true, class: 'form-inline') do |form| %>
   <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <%= form.text_field :body, class: 'form-control', autocomplete: :off %>
+  <%= form.text_field :body, class: 'form-control', autocomplete: :off, style: 'width: 90%;' %>
 
   <%= form.submit 'Send', class: 'btn btn-primary btn-sm ml-2' %>
 <% end %>
